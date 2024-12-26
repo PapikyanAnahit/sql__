@@ -1,0 +1,71 @@
+DROP TABLE IF EXISTS Economic__school_teachers;
+DROP TABLE IF EXISTS Economic__school_students;
+DROP TABLE IF EXISTS Economic__school_streams;
+
+CREATE TABLE Economic__school_streams(
+  	stream_id INT PRIMARY KEY,
+	stream_name VARCHAR(255)
+);
+
+INSERT INTO Economic__school_streams(stream_id, stream_name)
+VALUES
+(1, 'Economic'),
+(2, 'Science_and_Mathematics'),
+(3, 'Informatics'),
+(4, 'Humanities');
+
+SELECT * FROM Economic__school_streams;
+
+
+CREATE TABLE Economic__school_students(
+  	student_id INT PRIMARY KEY,
+	student_name VARCHAR(255),
+  	stream_id INT,
+  	FOREIGN KEY (stream_id) REFERENCES Economic__school_streams(stream_id)
+);
+
+INSERT INTO Economic__school_students(student_id, student_name, stream_id)
+VALUES
+(1, 'Ani', 3),
+(2, 'Anahit', 3),
+(3, 'Rosie', 3),
+(4, 'Eva', 2),
+(5, 'Kima', 4);
+
+SELECT * FROM Economic__school_students;
+
+CREATE TABLE Economic__school_teachers(
+  	teacher_id INT PRIMARY KEY,
+	teacher_name VARCHAR(255),
+  	stream_id INT,
+  	FOREIGN KEY (stream_id) REFERENCES Economic__school_streams(stream_id)
+);
+
+
+INSERT INTO Economic__school_teachers(teacher_id, teacher_name, stream_id)
+VALUES
+(1, 'Nina', 1),
+(2, 'Armine', 3),
+(3, 'Karen', 2),
+(4, 'Arusyak', 4),
+(5, 'Anahit', 3);
+
+SELECT * FROM Economic__school_teachers;
+
+
+CREATE TABLE Student_grade (
+    id INT PRIMARY KEY,
+    student_id INT, 
+    grade INT,
+    FOREIGN KEY (student_id) REFERENCES Economic__school_students(student_id)
+);
+
+INSERT INTO Student_grade (id, student_id, grade)
+VALUES
+(1, 1, 10), 
+(2, 2, 9),  
+(3, 3, 9),  
+(4, 4, 8),   
+(5, 5, 7);   
+
+SELECT * FROM Student_grade;
